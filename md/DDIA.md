@@ -30,7 +30,8 @@
 * The typical canonical form of RDF is in XML, which, no, so you want to use some other way of expressing it.
 * SPARQL and Turtle are two general-purpose ways of writing queries against data using the tripe-store model.
 * There is also Cypher, which was created for the Neo4j database and semi-limited to it.
-#Chapter 3 --- Storage and Retrieval
+
+# Chapter 3 --- Storage and Retrieval
 ## Logs and hash maps
 
 * Strictly speaking, a **log** is any append-only sequence of records. Logs may be human-readable, or they may only be machine-readable.
@@ -203,8 +204,8 @@
 * Sorting the rows improves read performance when you *do* need to query specific rows in a column-oriented database. You can multi-sort by as many rows as desired, obviously, but rows beyond the first will only help when performing grouped queries.
 * Additionally, sorting keys can help greatly with compression. Especially on the first sort-order key, something like run-length encoding can result in incredible read performance. With low enough cardinality multiple gigabytes of data can get pushed down to mere kilobytes in size!
 * A clever idea is to actually maintain multiple sort orders on disc, by replicating the data with several different sorts. Obviously this is taking read performance at the cost of write performance as far is will go. Vertica is one example of a database that offers this feature.
-#Chapter 4 --- Encoding and Evolution
 
+# Chapter 4 --- Encoding and Evolution
 ## Introduction to data serialization
 * Applications evolve over time.
 * When the application is server-side, you perform a **rolling upgrade**, taking down a few nodes in your deployment at a time for upgrades.
@@ -298,6 +299,7 @@
 * Example message brokers are ZeroMQ, Apache Kafka, and Google PubSub.
 * When using this pattern, your application parts no longer need to be aware of one another. Message emitters can emit messages without caring about who's listening, and message listeners can consume messages without being aware of who's emitting them.
 * This pattern is good for separation of concerns. The trade-off is that there is one more service you have to maintain. Message brokers are not a lightweight solution overhead-wise.
+
 # Chapter 5 --- Replication
 * **Replication** is one of the strategies for distributing data processes across multiple nodes (the other is **partitioning**, the subject of a later chapter).
 * The difference between replication and partitioning is that whilst replication has you keep multiple copies of the data in several different places, partioning has you split that one dataset amongst multiple partitions.
@@ -405,8 +407,8 @@
 * The strategy is to perform a **sloppy quorum**: write that data to the right amount of still-available nodes.
 * Once the nodes that are the true home for that data become available again, perform a **hinted handoff** to those nodes.
 * Reader note: the great AWS EC2 node failure outage of 2013 or thereabout occurred because this mechanism floored the network.
-# Chapter 6 --- Partitioning
 
+# Chapter 6 --- Partitioning
 * **Partitioning** is the splitting of data across multiple nodes.
 * It is a necessity for scaling to particularly large datasets.
 * It is usually combined with replication.
@@ -469,6 +471,7 @@
   * A routing tier can connect to the necessary node.
   * The client can maintain information on the right node, and connect to it directly.
 * Zookeeper is a hierarchical key-value store designed to store config metadata that is used by many services to address this exact problem.
+
 # Chapter 7 --- Transactions
 
 * Transactions provide guarantees about the behavior of data that are fundamental to the old SQL style of operation.
@@ -579,8 +582,8 @@
 * It beats 2PL for certain workloads!
 * SSI detects, at commit time (e.g. at the end of the transaction), whether or not any of the operations (reads or writes) that the transaction is performing are based on outdated premises (values that have changed since the beginning of the transaction). If not, the transaction goes through. If yes, then the transaction fails and a retry is prompted.
 * For read-heavy workloads, SSI is a real winner!
-# Chapter 8 --- Distributed Failures
 
+# Chapter 8 --- Distributed Failures
 * Computers are designed to fail all at once and catastrophically.
 * Distributed services are fundamentally different. They need to fail only partially, if possible, in order to allow as many services as possible to continue to operate.
 * This unlocks a lot of additional failure modes, **partial failures**, which are both hard to understand and hard to reason about.
@@ -713,8 +716,8 @@
 
 
 * The chapter ends with a discussion of the sorts of things ZooKeeper is used for.
-# Chapter 9.1 --- Chubby Lock Service
 
+# Chapter 9.1 --- Chubby Lock Service
 * A **distributed lock service** is a service which provides distributed nodes a common lock implementation.
 * These locks are used for access to shared resources in a replication environment.
 * Chubby is Google's implementation of a distributed lock service, and it was very influential in further designs.
@@ -832,6 +835,7 @@
 ## Declarative query languages
 * There has been a move to a SQL-like declarative query languages with dataflow engines.
 * Also, a whole bunch of useful algorithms are "baked in" the ecosystem. E.g. there are machine learning specific Spark libraries!
+
 # Chapter 11 --- Streams
 
 * Stream processing is a near-realtime, high-throughput alternative to batch processing.
