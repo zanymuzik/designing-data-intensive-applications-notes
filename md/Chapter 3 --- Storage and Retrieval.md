@@ -1,4 +1,4 @@
-#Chapter 3 --- Storage and Retrieval
+# Chapter 3 --- Storage and Retrieval
 ## Logs and hash maps
 
 * Strictly speaking, a **log** is any append-only sequence of records. Logs may be human-readable, or they may only be machine-readable.
